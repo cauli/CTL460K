@@ -1,0 +1,14 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/AstronautMovement.cs">
+    <Files>
+      <File FileName="Assets/Plugins/Pixelplacement/iTween/ReadMe!/ReadMe!.txt" Line="1" Column="1" />
+      <File FileName="Assets/Script/AstronautMovement.cs" Line="13" Column="3" />
+      <File FileName="Assets/Plugins/Pixelplacement/iTween/Sample/MoveSample.cs" Line="7" Column="116" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
