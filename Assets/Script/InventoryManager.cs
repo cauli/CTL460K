@@ -3,7 +3,7 @@ using System.Collections;
 
 public class InventoryManager : MonoBehaviour {
 
-	Item[] currentItems;
+	public GameObject[] currentItems;
 	int maxItems = 3;
 
 	void Start () 
@@ -13,12 +13,12 @@ public class InventoryManager : MonoBehaviour {
 	
 	bool InsertItem (Item item) 
 	{
-
+		return true;
 	}
 
 	bool CombineItems (Item item1, Item item2)
 	{
-
+		return true;
 	}
 
 	void DropItem (Item item)
