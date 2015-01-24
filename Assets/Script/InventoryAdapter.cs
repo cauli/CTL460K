@@ -34,7 +34,7 @@ public class InventoryAdapter : MonoBehaviour {
 				Image itemImage = slotItem.GetComponent<Image>();
 				
 				InventoryItem inventoryItem = slotItem.GetComponent<InventoryItem>();
-				
+				inventoryItem.character = character;
 				inventoryItem.item = item;
 				
 				itemImage.sprite = inventoryItem.item.gameObject.GetComponent<SpriteRenderer>().sprite;
