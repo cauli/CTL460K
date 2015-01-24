@@ -7,9 +7,10 @@ public class NarrativeManager : MonoBehaviour {
 	public Text screenText;
 
 	string pipe = "|";
-
-
+	
 	string curStr = "";
+
+	public Mikhail mikhail;
 
 	void Start () {
 
@@ -63,6 +64,11 @@ public class NarrativeManager : MonoBehaviour {
 	}
 
 	public void deleteText() {
+		if(mikhail != null)
+		{
+			mikhail.setSilentWave ();
+		}
+
 		StartCoroutine(animateErase ());
 	}
 
@@ -75,6 +81,8 @@ public class NarrativeManager : MonoBehaviour {
 		int i = strComplete.Length;
 		string str = strComplete;
 		while(i > 0){
+
+
 			str = str.Remove (str.Length - 1);
 			i--;
 			curStr = str;
@@ -87,10 +95,21 @@ public class NarrativeManager : MonoBehaviour {
 		int i = 0;
 		string str = "";
 		while(i < strComplete.Length){
+			if(mikhail != null)
+			{
+				mikhail.setRandomWave ();
+			}
+
 			str += strComplete[i++];
 			curStr = str;
 			screenText.text = str + pipe;
 			yield return new WaitForSeconds(0.02f);
 		}
+
+		if(mikhail != null)
+		{
+			mikhail.setSilentWave ();
+		}
+
 	}
 }
