@@ -10,7 +10,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 	Image itemImage;
 	Vector3 originalPosition;
 	GameObject player;
-	Character character;
+	public Character character;
 
 	bool hasDragged = false;
 
@@ -78,13 +78,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
 	void Start ()
 	{
-		player = GameObject.FindGameObjectWithTag("Player");
-		character = player.GetComponent<Character>();
 
-		if(item.gameObject != null);
-		{
-			itemImage = item.gameObject.GetComponent<Image>();
-		}
 	}
 
 	void Update () {
