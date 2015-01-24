@@ -8,6 +8,7 @@ public class Droppable : MonoBehaviour {
 
 	public bool destroysSelfWhenAccepted= false;
 
+
 	// Checks if this droppable accepts
 	// the item dragged to it
 	public bool checkAccept(Item droppedItem)
@@ -19,7 +20,17 @@ public class Droppable : MonoBehaviour {
 				if(destroysSelfWhenAccepted)
 				{
 					GameObject.Destroy(gameObject);
+
+					if(gameObject.name == "Parafuso")
+					{
+						Parafuso.removedCount++;
+						if(Parafuso.removedCount == 2)
+						{
+							GameObject.Destroy (GameObject.Find("Tampa"));
+						}
+					}
 				}
+
 				return true;
 			}
 		}

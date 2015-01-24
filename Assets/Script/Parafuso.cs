@@ -5,21 +5,18 @@ public class Parafuso : MonoBehaviour {
 
 	public Item[] parafusadeiras;
 	public Sprite[] parafusos;
+	public static int removedCount = 0;
 
-	// Use this for initialization
 	void Start () {
-
 		int index = Random.Range (0,parafusadeiras.Length);
+
 		Item parafusadeira = parafusadeiras[index];
 
 		gameObject.GetComponent<SpriteRenderer>().sprite = parafusos[index];
 
 		gameObject.GetComponent<Droppable>().accepts[0] = parafusadeira;
-
-
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 	
 	}

@@ -57,6 +57,14 @@ public class Character : MonoBehaviour {
 			Camera.main.transform.position = toPosition;
 			gameObject.transform.position = portal.destination.initialCharacterPosition.position;
 		}
+		else if(coll.gameObject.tag == "SelectedItem" && coll.gameObject.name == "Adesivo"){
+			// Adicionar item no inventario se ele nao estiver cheio
+			Item item = coll.gameObject.GetComponent<Item>();
+			bool added = InsertItem(item);
+			coll.gameObject.tag = "Item";
+			coll.gameObject.collider2D.isTrigger = false;
+			coll.gameObject.renderer.material.color = Color.white;
+		}
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
