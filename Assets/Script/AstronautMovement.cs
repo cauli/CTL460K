@@ -37,7 +37,7 @@ public class AstronautMovement : MonoBehaviour {
 
 
 
-			iTween.MoveTo(gameObject, iTween.Hash("x", mousePos3D.x, "y", mousePos3D.y, "easeType", "easeInOutCubic", "loopType", "none", "delay", .2, "speed", 2.3));
+			iTween.MoveTo(gameObject, iTween.Hash("x", mousePos3D.x, "y", mousePos3D.y, "loopType", "none", "delay", .2, "speed", 2.3));
 
 			RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 			
@@ -65,7 +65,12 @@ public class AstronautMovement : MonoBehaviour {
 					}
 
 					hit.collider.gameObject.tag = "SelectedPortal";
-				}else if(hit.collider.gameObject.tag == "InventoryItem"){
+				}else if(hit.collider.gameObject.tag == "Trigger")
+				{
+					hit.collider.gameObject.GetComponent<Trigger>().Triggered();
+					Debug.Log("Trigger");
+				}
+				else if(hit.collider.gameObject.tag == "InventoryItem"){
 					Debug.Log("HUEHEUHEUHEUUHE");
 				}
 

@@ -12,9 +12,38 @@ public class NarrativeManager : MonoBehaviour {
 	string curStr = "";
 
 	void Start () {
-		setText ("O talles joga futebol");
+
+		initL1();
+	}
+
+	public void initL1()
+	{
+		StartCoroutine(level1InitialScript ());
+	}
+
+	public IEnumerator level1InitialScript() 
+	{
+		setText ("MIKHAIL: Cosmonaut, I've found problem with the station.");
+
+		yield return new WaitForSeconds(5.00f);
+		setText ("MIKHAIL: I need you to look into it");
+		yield return new WaitForSeconds(4.00f);
+		setText ("MIKHAIL: What do we do now?");
+		yield return new WaitForSeconds(8.00f);
+
 		deleteText ();
 	}
+
+
+	public IEnumerator level1FinalScript() 
+	{
+		setText ("MIKHAIL: This one was easy.");
+		yield return new WaitForSeconds(5.00f);
+		setText ("MIKHAIL: Let\'s see if you\'ll survive next time.");
+		yield return new WaitForSeconds(8.00f);
+		deleteText ();
+	}
+
 
 	void Update () {
 		if((int)Time.fixedTime % 2 == 0)
