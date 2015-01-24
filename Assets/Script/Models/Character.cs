@@ -5,6 +5,7 @@ public class Character : MonoBehaviour {
 
 	public int maxItens;
 	public Item[] inventario;
+	public InventoryAdapter inventoryAdapter;
 
 	// Use this for initialization
 	void Start () {
@@ -18,12 +19,15 @@ public class Character : MonoBehaviour {
 
 	bool InsertItem (Item item) 
 	{
-		return true;
-	}
-	
-	bool CombineItems (Item item1, Item item2)
-	{
-		return true;
+		for (int i = 0; i < inventario.Length; i++) {
+			if(inventario[i] == null){
+				inventario[i] = item;
+				item.renderer.enabled = false;
+				inventoryAdapter.UpdateInventory();
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	void DropItem (Item item)
@@ -43,9 +47,17 @@ public class Character : MonoBehaviour {
 
 			Vector3 toPosition = new Vector3(x,y,-45);
 			// Mover camera para outro mapa 
+			iTween.Stop();
 			Camera.main.transform.position = toPosition;
+			gameObject.transform.position = portal.destination.initialCharacterPosition.position;
+		}
+	}
 
-			Debug.Log(portal);
+	void OnCollisionEnter2D(Collision2D coll) {
+		if (coll.gameObject.tag == "SelectedItem") {
+			// Adicionar item no inventario se ele nao estiver cheio
+			Item item = coll.gameObject.GetComponent<Item>();
+			bool added = InsertItem(item);
 		}
 	}
 }
