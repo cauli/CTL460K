@@ -9,7 +9,7 @@ public class AstronautMovement : MonoBehaviour {
 
 	void Update () {
 		if (Input.GetButtonDown ("Fire1")) {
-
+			Debug.Log("firee");
 
 			Vector3 mousePos2D = Input.mousePosition;
 			Vector3 mousePos3D = Camera.main.ScreenToWorldPoint (mousePos2D);
@@ -20,6 +20,7 @@ public class AstronautMovement : MonoBehaviour {
 			
 			if(hit.collider != null)
 			{
+				Debug.Log(hit.collider.gameObject.tag);
 				if(hit.collider.gameObject.tag == "Item"){
 					Debug.Log ("Item");
 					GameObject[] selectedObjects = GameObject.FindGameObjectsWithTag("SelectedItem");
@@ -42,6 +43,8 @@ public class AstronautMovement : MonoBehaviour {
 					}
 
 					hit.collider.gameObject.tag = "SelectedPortal";
+				}else if(hit.collider.gameObject.tag == "InventoryItem"){
+					Debug.Log("HUEHEUHEUHEUUHE");
 				}
 
 			}

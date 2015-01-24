@@ -17,17 +17,23 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 	public void OnPointerClick(PointerEventData eventData) {
 		if(!hasDragged)
 		{
-			Debug.Log ("Drop!");
+			iTween.Stop();
+			Debug.Log ("Drop! TALLES BUURROO");
+
+			if(gameObject.tag != "Dropped"){
+				character.DropItem(item);
+			}
 		}
 	}
 
 	public void OnBeginDrag (PointerEventData pointerEventData) {
 		originalPosition = gameObject.transform.position;
+		iTween.Stop();
 	}
 
 	public void OnDrag(PointerEventData pointerEventData) {
 		hasDragged = true;
-		gameObject.transform.position = new Vector3(pointerEventData.position.x, pointerEventData.position.y, 0);
+		gameObject.transform.position = new Vector3(pointerEventData.position.x, pointerEventData.position.y);
 	}
 
 	public void OnEndDrag(PointerEventData pointerEventData) {
@@ -40,7 +46,6 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
 		if(hit.collider != null)
 		{
-			Debug.Log ("Collider exists");
 
 			if(hit.collider.gameObject.tag == "Droppable"){
 				Droppable droppable = hit.collider.gameObject.GetComponent<Droppable>();
@@ -49,9 +54,12 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 				{
 					Debug.LogWarning ("Droppable accepted item " + item.name);
 
+					iTween.MoveTo(character.gameObject, iTween.Hash("x", droppable.transform.position.x, "y", droppable.transform.position.y, "easeType", 
+					                                                "easeInOutCubic", "loopType", "none", "delay", .2, "speed", 2.3));
 				//	character.DropItem(item);
 
 					reject = false;
+					gameObject.tag = "Dropped";
 				}
 				else
 				{
@@ -73,7 +81,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 		player = GameObject.FindGameObjectWithTag("Player");
 		character = player.GetComponent<Character>();
 
-		if(item != null);
+		if(item.gameObject != null);
 		{
 			itemImage = item.gameObject.GetComponent<Image>();
 		}
