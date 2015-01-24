@@ -5,6 +5,7 @@ public class AstronautMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Debug.Log ("Start");
 		//iTween.MoveTo(gameObject, iTween.Hash("x", 2, "easeType", "easeInOutExpo", "loopType", "pingPong", "delay", .1));
 	}
 
@@ -18,15 +19,25 @@ public class AstronautMovement : MonoBehaviour {
 		if (Input.GetButtonDown ("Fire1")) {
 
 			Vector3 mousePos2D = Input.mousePosition;
-			
-			iTween.MoveTo(gameObject, iTween.Hash("x", mousePos2D.x, "y", mousePos2D.y, "easeType", "easeInOutExpo", "loopType", "pingPong", "delay", .1));
+			Vector3 mousePos3D = Camera.main.ScreenToWorldPoint (mousePos2D);
 
-			// Construct a ray from the current mouse coordinates
-			/*var ray : Ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			if (Physics.Raycast (ray)) {
-				// Create a particle if hit
-				Instantiate (particle, transform.position, transform.rotation);
-			}*/
+			iTween.MoveTo(gameObject, iTween.Hash("x", mousePos3D.x, "y", mousePos3D.y, "easeType", "easeInOutCubic", "loopType", "none", "delay", .2, "speed", 2.3));
+
+			RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+			
+			if(hit.collider != null)
+			{
+				GameObject[] selectedObjects = GameObject.FindGameObjectsWithTag("SelectedItem");
+
+				foreach(GameObject obj in selectedObjects)
+				{
+					obj.tag = "Item";
+					obj.renderer.material.color = Color.red;
+				}
+
+				hit.collider.gameObject.tag = "SelectedItem";
+				hit.collider.gameObject.renderer.material.color = Color.blue;
+			}
 		}
 	}
 }
