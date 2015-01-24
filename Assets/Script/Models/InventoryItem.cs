@@ -14,4 +14,8 @@ public class InventoryItem : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	void Test () {
+	
+	}
 }
