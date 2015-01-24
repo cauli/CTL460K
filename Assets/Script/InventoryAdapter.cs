@@ -20,7 +20,6 @@ public class InventoryAdapter : MonoBehaviour {
 
 			if(item != null)
 			{
-
 				GameObject slotItem = iSlot.transform.GetChild(0).gameObject as GameObject;
 
 				Image itemImage = slotItem.GetComponent<Image>();

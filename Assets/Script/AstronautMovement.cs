@@ -10,6 +10,7 @@ public class AstronautMovement : MonoBehaviour {
 	void Update () {
 		if (Input.GetButtonDown ("Fire1")) {
 
+
 			Vector3 mousePos2D = Input.mousePosition;
 			Vector3 mousePos3D = Camera.main.ScreenToWorldPoint (mousePos2D);
 

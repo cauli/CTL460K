@@ -5,10 +5,11 @@ public class Character : MonoBehaviour {
 
 	public int maxItens;
 	public Item[] inventario;
+	InventoryAdapter inventory;
 
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
@@ -32,9 +33,9 @@ public class Character : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		Debug.Log ("Trigger Portal" + other.gameObject);
+		Debug.Log ("Trigger Portal " + other.gameObject);
 		if (other.gameObject.tag == "SelectedPortal") {
-			Debug.Log ("Portal Certo" + other.gameObject);
+			Debug.Log ("Portal Certo " + other.gameObject);
 
 			Portal portal = other.gameObject.GetComponent<Portal>();
 
