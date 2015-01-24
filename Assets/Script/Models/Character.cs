@@ -49,6 +49,8 @@ public class Character : MonoBehaviour {
 			// Adicionar item no inventario se ele nao estiver cheio
 			Item item = coll.gameObject.GetComponent<Item>();
 			bool added = InsertItem(item);
+			coll.gameObject.tag = "Item";
+			coll.gameObject.renderer.material.color = Color.white;
 		}else if (coll.gameObject.tag == "SelectedPortal"){
 			Portal portal = coll.gameObject.GetComponent<Portal>();
 			

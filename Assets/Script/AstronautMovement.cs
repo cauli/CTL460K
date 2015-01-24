@@ -45,7 +45,6 @@ public class AstronautMovement : MonoBehaviour {
 			{
 				Debug.Log(hit.collider.gameObject.tag);
 				if(hit.collider.gameObject.tag == "Item"){
-					Debug.Log ("Item");
 					GameObject[] selectedObjects = GameObject.FindGameObjectsWithTag("SelectedItem");
 					
 					foreach(GameObject obj in selectedObjects)
