@@ -15,4 +15,20 @@ public class Character : MonoBehaviour {
 	void Update () {
 	
 	}
+
+	bool InsertItem (Item item) 
+	{
+		return true;
+	}
+	
+	bool CombineItems (Item item1, Item item2)
+	{
+		return true;
+	}
+	
+	void DropItem (Item item)
+	{
+		
+	}
+
 }

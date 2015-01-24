@@ -3,14 +3,25 @@ using System.Collections;
 
 public class InventoryAdapter : MonoBehaviour {
 
-	public InventoryManager currentInventory;
+	public Character character;
 
-	// Use this for initialization
+	public Transform inventorySlot;
+
 	void Start () {
-	
+
+		//inventorySlot.SetParent(gameObject.transform, true);
+
+		int currentX = 0;
+
+		foreach(Item item in character.inventario)
+		{
+			currentX += 150;
+
+			GameObject iSlot = (GameObject) Instantiate (inventorySlot, new Vector3(currentX, 0, 0), Quaternion.identity);
+			iSlot.transform.parent = gameObject.transform;
+		}
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 	
 	}
