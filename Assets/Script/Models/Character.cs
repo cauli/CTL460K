@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Item : MonoBehaviour {
+public class Character : MonoBehaviour {
+
+	public int maxItens;
+	public Items[] inventario;
 
 	// Use this for initialization
 	void Start () {
-		gameObject.rigidbody2D.AddTorque(Random.Range(-20,20));
+	
 	}
 	
 	// Update is called once per frame
