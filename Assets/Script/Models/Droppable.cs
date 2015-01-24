@@ -6,6 +6,8 @@ public class Droppable : MonoBehaviour {
 
 	public Item[] accepts;
 
+	public bool destroysSelfWhenAccepted= false;
+
 	// Checks if this droppable accepts
 	// the item dragged to it
 	public bool checkAccept(Item droppedItem)
@@ -14,6 +16,10 @@ public class Droppable : MonoBehaviour {
 		{
 			if(item == droppedItem)
 			{
+				if(destroysSelfWhenAccepted)
+				{
+					GameObject.Destroy(gameObject);
+				}
 				return true;
 			}
 		}

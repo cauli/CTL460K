@@ -16,7 +16,7 @@ public class Triggerable : MonoBehaviour {
 	
 	}
 
-	public void Trigger () {
+	public bool Trigger () {
 		if(gameObject.tag == "Window")
 		{
 			if(!moving)
@@ -25,15 +25,27 @@ public class Triggerable : MonoBehaviour {
 
 				if(state == false)
 				{
+
 					state = true;
 					iTween.MoveBy(gameObject, iTween.Hash("y", 4, "easeType", "easeInOutCubic", "loopType", "none", "time", 3,"oncomplete","onEnd"));
+					return false;
 				}
 				else
 				{
+
 					state = false;
 					iTween.MoveBy(gameObject, iTween.Hash("y", -4, "easeType", "easeInOutCubic", "loopType", "none", "time", 3,"oncomplete","onEnd"));
+					return true;
 				}
 			}
+			else
+			{
+				return !state;
+			}
+		}
+		else
+		{
+			return !state;
 		}
 	}
 

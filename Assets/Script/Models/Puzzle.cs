@@ -5,7 +5,7 @@ public class Puzzle : MonoBehaviour {
 
 	public int tempo;
 	public Mapa[] mapas;
-	public Mapa mapaInicial;
+	public Mapa currentMap;
 
 	// Use this for initialization
 	void Start () {

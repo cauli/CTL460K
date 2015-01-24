@@ -10,10 +10,14 @@ public class NarrativeManager : MonoBehaviour {
 	
 	string curStr = "";
 
+	bool isNarrating = false;
+
 	public Mikhail mikhail;
 
-	void Start () {
 
+	int narratingState = 0;
+
+	void Start () {
 		initL1();
 	}
 
@@ -22,14 +26,35 @@ public class NarrativeManager : MonoBehaviour {
 		StartCoroutine(level1InitialScript ());
 	}
 
+	public void finalL1()
+	{
+		StartCoroutine(level1FinalScript ());
+	}
+
+
+	public void replay()
+	{
+		if(!isNarrating)
+		{
+			if(narratingState == 0)
+			{
+				initL1 ();
+			}
+			else if(narratingState == 1)
+			{
+				finalL1 ();
+			}
+		}
+	}
+
 	public IEnumerator level1InitialScript() 
 	{
+		isNarrating = true;
 		setText ("MIKHAIL: Cosmonaut, I've found problem with the station.");
-
 		yield return new WaitForSeconds(5.00f);
 		setText ("MIKHAIL: I need you to look into it");
 		yield return new WaitForSeconds(4.00f);
-		setText ("MIKHAIL: What do we do now?");
+		setText ("MIKHAIL: What do we do right now?");
 		yield return new WaitForSeconds(8.00f);
 
 		deleteText ();
@@ -38,6 +63,7 @@ public class NarrativeManager : MonoBehaviour {
 
 	public IEnumerator level1FinalScript() 
 	{
+		isNarrating = true;
 		setText ("MIKHAIL: This one was easy.");
 		yield return new WaitForSeconds(5.00f);
 		setText ("MIKHAIL: Let\'s see if you\'ll survive next time.");
@@ -89,6 +115,8 @@ public class NarrativeManager : MonoBehaviour {
 			screenText.text = str + pipe;
 			yield return new WaitForSeconds(0.05f);
 		}
+
+		isNarrating = false;
 	}
 
 	public IEnumerator animateText(string strComplete){

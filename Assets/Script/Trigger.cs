@@ -5,10 +5,30 @@ public class Trigger : MonoBehaviour {
 
 	public Triggerable triggerable;
 
+	public Sprite[] stateSprites;
+
+	private bool state = false;
+
 	public void Triggered () {
-		triggerable.Trigger();
+		state = triggerable.Trigger();
+
+		setState(state);
 	}
 
+	private void setState(bool state)
+	{
+		if(gameObject.name == "WindowButton")
+		{
+			if(state == true)
+			{
+				gameObject.GetComponent<SpriteRenderer>().sprite = stateSprites[0];
+			}
+			else
+			{
+				gameObject.GetComponent<SpriteRenderer>().sprite = stateSprites[1];
+			}
+		}
+	}
 	// Use this for initialization
 	void Start () {
 	

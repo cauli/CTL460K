@@ -21,7 +21,10 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 			Debug.Log ("Drop! TALLES BUURROO");
 
 			if(gameObject.tag != "Dropped"){
-				character.DropItem(item);
+				if(item != null)
+				{
+					character.DropItem(item);
+				}
 			}
 		}
 	}
@@ -39,7 +42,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 	public void OnEndDrag(PointerEventData pointerEventData) {
 		hasDragged = false;
 
-		Debug.Log ("DragEnd!");
+//		Debug.Log ("DragEnd!");
 		RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
 		bool reject = true;
@@ -58,8 +61,10 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 					                                                "easeInOutCubic", "loopType", "none", "delay", .2, "speed", 2.3));
 				//	character.DropItem(item);
 
-					reject = false;
-					gameObject.tag = "Dropped";
+				
+					//reject = true;
+
+					//gameObject.tag = "Dropped";
 				}
 				else
 				{

@@ -32,10 +32,10 @@ public class Character : MonoBehaviour {
 	
 	public void DropItem (Item item)
 	{
-		Debug.Log("ENTROU NO DROP");
+		Debug.Log("ENTROU");
 		for (int i = 0; i < inventario.Length; i++) {
 			if(inventario[i] == item){
-				Debug.Log("DROPA ESSA PORRAAA");
+				Debug.Log("DROPOU");
 				inventario[i].renderer.enabled = true;
 				inventario[i].gameObject.transform.position = gameObject.transform.position;
 				inventario[i] = null;
@@ -44,14 +44,8 @@ public class Character : MonoBehaviour {
 		inventoryAdapter.UpdateInventory();
 	}
 
-	void OnCollisionEnter2D(Collision2D coll) {
-		if (coll.gameObject.tag == "SelectedItem") {
-			// Adicionar item no inventario se ele nao estiver cheio
-			Item item = coll.gameObject.GetComponent<Item>();
-			bool added = InsertItem(item);
-			coll.gameObject.tag = "Item";
-			coll.gameObject.renderer.material.color = Color.white;
-		}else if (coll.gameObject.tag == "SelectedPortal"){
+	void OnTriggerEnter2D(Collider2D coll) {
+		if (coll.gameObject.tag == "SelectedPortal"){
 			Portal portal = coll.gameObject.GetComponent<Portal>();
 			
 			float x = portal.destination.mapa.gameObject.transform.position.x;
@@ -62,6 +56,16 @@ public class Character : MonoBehaviour {
 			iTween.Stop();
 			Camera.main.transform.position = toPosition;
 			gameObject.transform.position = portal.destination.initialCharacterPosition.position;
+		}
+	}
+
+	void OnCollisionEnter2D(Collision2D coll) {
+		if (coll.gameObject.tag == "SelectedItem") {
+			// Adicionar item no inventario se ele nao estiver cheio
+			Item item = coll.gameObject.GetComponent<Item>();
+			bool added = InsertItem(item);
+			coll.gameObject.tag = "Item";
+			coll.gameObject.renderer.material.color = Color.white;
 		}
 	}
 }

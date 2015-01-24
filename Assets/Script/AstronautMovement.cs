@@ -9,8 +9,6 @@ public class AstronautMovement : MonoBehaviour {
 
 	void Update () {
 		if (Input.GetButtonDown ("Fire1")) {
-			Debug.Log("firee");
-
 			Vector3 mousePos2D = Input.mousePosition;
 			Vector3 mousePos3D = Camera.main.ScreenToWorldPoint (mousePos2D);
 
@@ -21,8 +19,6 @@ public class AstronautMovement : MonoBehaviour {
 			float AngleDeg = (180 / Mathf.PI) * AngleRad;
 			// Rotate Object
 
-
-			Debug.Log (AngleDeg);
 			if(Mathf.Abs (AngleDeg) > 100)
 			{
 				this.transform.localScale = new Vector3(-1, 1, 1);
@@ -34,16 +30,13 @@ public class AstronautMovement : MonoBehaviour {
 				this.transform.rotation = Quaternion.Euler(0, 0, AngleDeg - 46);
 			}
 
-
-
-
 			iTween.MoveTo(gameObject, iTween.Hash("x", mousePos3D.x, "y", mousePos3D.y, "loopType", "none", "delay", .2, "speed", 2.3));
 
 			RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 			
 			if(hit.collider != null)
 			{
-				Debug.Log(hit.collider.gameObject.tag);
+//				Debug.Log(hit.collider.gameObject.tag);
 				if(hit.collider.gameObject.tag == "Item"){
 					GameObject[] selectedObjects = GameObject.FindGameObjectsWithTag("SelectedItem");
 					
@@ -56,7 +49,7 @@ public class AstronautMovement : MonoBehaviour {
 					hit.collider.gameObject.tag = "SelectedItem";
 					hit.collider.gameObject.renderer.material.color = Color.blue;
 				}else if(hit.collider.gameObject.tag == "Portal"){
-					Debug.Log ("Portal");
+				//	Debug.Log ("Portal");
 
 					GameObject[] selectedObjects = GameObject.FindGameObjectsWithTag("SelectedPortal");
 					foreach(GameObject obj in selectedObjects)
@@ -73,7 +66,13 @@ public class AstronautMovement : MonoBehaviour {
 				else if(hit.collider.gameObject.tag == "InventoryItem"){
 					Debug.Log("HUEHEUHEUHEUUHE");
 				}
+				else if(hit.collider.gameObject.tag == "Mikhail"){
 
+					//Debug.Log("Clicked Mikhail");
+					Mikhail mikhail = hit.collider.gameObject.GetComponent<Mikhail>();
+
+					mikhail.replay();
+				}
 			}
 		}
 	}
