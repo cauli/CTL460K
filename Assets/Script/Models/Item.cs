@@ -4,8 +4,8 @@ using System.Collections;
 public class Item : MonoBehaviour {
 
 	public Item[] possibleCombinations;
-	public string name;
-	public string descripiton;
+	public string nameItem;
+	public string descripitonItem;
 
 	// Use this for initialization
 	void Start () {

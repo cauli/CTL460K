@@ -4,7 +4,7 @@ using System.Collections;
 public class Character : MonoBehaviour {
 
 	public int maxItens;
-	public Items[] inventario;
+	public Item[] inventario;
 
 	// Use this for initialization
 	void Start () {
