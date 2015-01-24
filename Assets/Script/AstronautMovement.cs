@@ -19,16 +19,30 @@ public class AstronautMovement : MonoBehaviour {
 			
 			if(hit.collider != null)
 			{
-				GameObject[] selectedObjects = GameObject.FindGameObjectsWithTag("SelectedItem");
+				if(hit.collider.gameObject.tag == "Item"){
+					Debug.Log ("Item");
+					GameObject[] selectedObjects = GameObject.FindGameObjectsWithTag("SelectedItem");
+					
+					foreach(GameObject obj in selectedObjects)
+					{
+						obj.tag = "Item";
+						obj.renderer.material.color = Color.white;
+					}
+					
+					hit.collider.gameObject.tag = "SelectedItem";
+					hit.collider.gameObject.renderer.material.color = Color.blue;
+				}else if(hit.collider.gameObject.tag == "Portal"){
+					Debug.Log ("Portal");
 
-				foreach(GameObject obj in selectedObjects)
-				{
-					obj.tag = "Item";
-					obj.renderer.material.color = Color.red;
+					GameObject[] selectedObjects = GameObject.FindGameObjectsWithTag("SelectedPortal");
+					foreach(GameObject obj in selectedObjects)
+					{
+						obj.tag = "Portal";
+					}
+
+					hit.collider.gameObject.tag = "SelectedPortal";
 				}
 
-				hit.collider.gameObject.tag = "SelectedItem";
-				hit.collider.gameObject.renderer.material.color = Color.blue;
 			}
 		}
 	}

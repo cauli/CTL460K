@@ -31,4 +31,21 @@ public class Character : MonoBehaviour {
 		
 	}
 
+	void OnTriggerEnter2D(Collider2D other) {
+		Debug.Log ("Trigger Portal" + other.gameObject);
+		if (other.gameObject.tag == "SelectedPortal") {
+			Debug.Log ("Portal Certo" + other.gameObject);
+
+			Portal portal = other.gameObject.GetComponent<Portal>();
+
+			float x = portal.destination.mapa.gameObject.transform.position.x;
+			float y = portal.destination.mapa.gameObject.transform.position.y;
+
+			Vector3 toPosition = new Vector3(x,y,-45);
+			// Mover camera para outro mapa 
+			Camera.main.transform.position = toPosition;
+
+			Debug.Log(portal);
+		}
+	}
 }
