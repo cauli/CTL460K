@@ -9,7 +9,7 @@ public class Item : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		startsWithTrigger = gameObject.collider2D.isTrigger;
-		gameObject.rigidbody2D.AddTorque(Random.Range(-1,1));
+		gameObject.rigidbody2D.AddTorque(Random.Range(-2,1));
 	}
 	
 	// Update is called once per frame

@@ -25,16 +25,16 @@ public class Triggerable : MonoBehaviour {
 
 				if(state == false)
 				{
-
+					gameObject.GetComponent<AudioSource>().Play();
 					state = true;
-					iTween.MoveBy(gameObject, iTween.Hash("y", 4, "easeType", "easeInOutCubic", "loopType", "none", "time", 3,"oncomplete","onEnd"));
+					iTween.MoveBy(gameObject, iTween.Hash("y", 4, "easeType", "easeInOutCubic", "loopType", "none", "time", 1.2,"oncomplete","onEnd"));
 					return false;
 				}
 				else
 				{
-
+					gameObject.GetComponent<AudioSource>().Play();
 					state = false;
-					iTween.MoveBy(gameObject, iTween.Hash("y", -4, "easeType", "easeInOutCubic", "loopType", "none", "time", 3,"oncomplete","onEnd"));
+					iTween.MoveBy(gameObject, iTween.Hash("y", -4, "easeType", "easeInOutCubic", "loopType", "none", "time", 1.2,"oncomplete","onEnd"));
 					return true;
 				}
 			}

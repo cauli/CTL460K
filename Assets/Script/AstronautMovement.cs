@@ -47,7 +47,7 @@ public class AstronautMovement : MonoBehaviour {
 					}
 					
 					hit.collider.gameObject.tag = "SelectedItem";
-					hit.collider.gameObject.renderer.material.color = Color.blue;
+					//hit.collider.gameObject.renderer.material.color = Color.blue;
 				}else if(hit.collider.gameObject.tag == "Portal"){
 				//	Debug.Log ("Portal");
 

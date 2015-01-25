@@ -7,6 +7,8 @@ public class Character : MonoBehaviour {
 	public Item[] inventario;
 	public InventoryAdapter inventoryAdapter;
 
+	public AudioSource audioSrc;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -57,13 +59,20 @@ public class Character : MonoBehaviour {
 			Camera.main.transform.position = toPosition;
 			gameObject.transform.position = portal.destination.initialCharacterPosition.position;
 		}
-		else if(coll.gameObject.tag == "SelectedItem" && coll.gameObject.name == "Adesivo"){
+		else if(coll.gameObject.tag == "SelectedItem" && (coll.gameObject.name == "Adesivo" || coll.gameObject.name == "Laika")){
 			// Adicionar item no inventario se ele nao estiver cheio
 			Item item = coll.gameObject.GetComponent<Item>();
 			bool added = InsertItem(item);
-			coll.gameObject.tag = "Item";
-			coll.gameObject.collider2D.isTrigger = false;
-			coll.gameObject.renderer.material.color = Color.white;
+
+			if(added)
+			{
+				coll.gameObject.tag = "Item";
+				coll.gameObject.collider2D.isTrigger = false;
+				coll.gameObject.rigidbody2D.isKinematic = false;
+				coll.gameObject.renderer.material.color = Color.white;
+
+				audioSrc.Play ();
+			}
 		}
 	}
 
@@ -72,8 +81,14 @@ public class Character : MonoBehaviour {
 			// Adicionar item no inventario se ele nao estiver cheio
 			Item item = coll.gameObject.GetComponent<Item>();
 			bool added = InsertItem(item);
-			coll.gameObject.tag = "Item";
-			coll.gameObject.renderer.material.color = Color.white;
+
+			if(added)
+			{
+				coll.gameObject.tag = "Item";
+				coll.gameObject.renderer.material.color = Color.white;
+				
+				audioSrc.Play ();
+			}
 		}
 	}
 }

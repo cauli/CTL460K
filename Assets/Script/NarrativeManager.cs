@@ -15,6 +15,14 @@ public class NarrativeManager : MonoBehaviour {
 	public Mikhail mikhail;
 
 
+	public AudioClip computer1;
+	public AudioClip computer2;
+	public AudioClip computer3;
+
+	public AudioClip computerFinal;
+
+	public AudioSource sfxSrc;
+
 	int narratingState = 0;
 
 	void Start () {
@@ -51,10 +59,13 @@ public class NarrativeManager : MonoBehaviour {
 	{
 		isNarrating = true;
 		setText ("MIKHAIL: Cosmonaut, I've found problem with the station.");
+		sfxSrc.PlayOneShot(computer1);
 		yield return new WaitForSeconds(5.00f);
 		setText ("MIKHAIL: I need you to look into it");
+		sfxSrc.PlayOneShot(computer2);
 		yield return new WaitForSeconds(4.00f);
 		setText ("MIKHAIL: What do we do right now?");
+		sfxSrc.PlayOneShot(computer3);
 		yield return new WaitForSeconds(8.00f);
 
 		deleteText ();
@@ -65,6 +76,7 @@ public class NarrativeManager : MonoBehaviour {
 	{
 		isNarrating = true;
 		setText ("MIKHAIL: This one was easy.");
+		sfxSrc.PlayOneShot(computerFinal);
 		yield return new WaitForSeconds(5.00f);
 		setText ("MIKHAIL: Let\'s see if you\'ll survive next time.");
 		yield return new WaitForSeconds(8.00f);
