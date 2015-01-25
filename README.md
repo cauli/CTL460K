@@ -1,6 +1,10 @@
 # CTL460K #
 ### A Global Game Jam 2015 Entry"
 
-O estação espacial CTL460K está habitada por apenas um cosmonauta e seu computador de bordo, o Mikhail.
+The CTL460K space station is inhabited by only a cosmonaut and your computer board, Mikhail.
 
-Mikhail geralmente conseguia manter tudo em ordem, mas um dia cansou de receber ordens e começou a dá-las.
+Mikhail usually could keep everything in order, but one day he got tired of taking orders and began to give them.
+
+### Info ##
+
+A 48h game made with Unity3D 
