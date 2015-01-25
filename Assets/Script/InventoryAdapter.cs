@@ -42,8 +42,9 @@ public class InventoryAdapter : MonoBehaviour {
 				InventoryItem inventoryItem = slotItem.GetComponent<InventoryItem>();
 				inventoryItem.character = character;
 				inventoryItem.item = item;
-				
+
 				itemImage.sprite = inventoryItem.item.gameObject.GetComponent<SpriteRenderer>().sprite;
+				itemImage.color = Color.white;
 			}
 			currentX += 55;
 		}

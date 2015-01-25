@@ -8,7 +8,7 @@ public class Character : MonoBehaviour {
 	public InventoryAdapter inventoryAdapter;
 
 	public AudioSource audioSrc;
-
+	public GameObject cameraGO;
 	// Use this for initialization
 	void Start () {
 	
@@ -53,11 +53,15 @@ public class Character : MonoBehaviour {
 			Portal portal = coll.gameObject.GetComponent<Portal>();
 			
 			float x = portal.destination.mapa.gameObject.transform.position.x;
-			float y = portal.destination.mapa.gameObject.transform.position.y;
+			float y = 0;
 			
 			Vector3 toPosition = new Vector3(x,y,-45);
 			// Mover camera para outro mapa 
 			iTween.Stop();
+
+			cameraGO.GetComponent<Puzzle>().currentMap = portal.destination.mapa;
+			cameraGO.GetComponent<Puzzle>().setMapConfig();
+
 			Camera.main.transform.position = toPosition;
 			gameObject.transform.position = portal.destination.initialCharacterPosition.position;
 		}

@@ -8,7 +8,10 @@ public class Droppable : MonoBehaviour {
 	public Item[] accepts;
 
 	public bool destroysSelfWhenAccepted= false;
-	
+
+	public Puzzle puzzle;
+
+
 	// Checks if this droppable accepts
 	// the item dragged to it
 	public bool checkAccept(Item droppedItem)
@@ -40,9 +43,19 @@ public class Droppable : MonoBehaviour {
 			
 
 				}else if(gameObject.name == "Caixa"){
-					GameObject.Find("Caixa").GetComponent<ParticleSystem>().Stop ();
-					SpriteRenderer spriteCaixa = gameObject.gameObject.GetComponent<SpriteRenderer>();
-					spriteCaixa.sprite = sprite;
+
+					if(Parafuso.removedCount >= 2)
+					{
+						// Arrumou a caixa com o adesivo
+						
+						GameObject.Find("Caixa").GetComponent<ParticleSystem>().Stop ();
+						SpriteRenderer spriteCaixa = gameObject.gameObject.GetComponent<SpriteRenderer>();
+						spriteCaixa.sprite = sprite;
+						
+						puzzle.EndLevel();
+					}
+
+
 				}
 
 				return true;
@@ -58,13 +71,13 @@ public class Droppable : MonoBehaviour {
 
 		yield return new WaitForSeconds(1.50f);
 		iTween.FadeTo(gameObject, 0, 0.5f);
-		yield return new WaitForSeconds(0.50f);
+		yield return new WaitForSeconds(5f);
 		GameObject.Destroy (gameObject);
 	}
 
 	// Use this for initialization
 	void Start () {
-	
+		puzzle = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Puzzle>();
 	}
 	
 	// Update is called once per frame

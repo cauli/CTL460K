@@ -6,14 +6,42 @@ public class Puzzle : MonoBehaviour {
 	public int tempo;
 	public Mapa[] mapas;
 	public Mapa currentMap;
+	public int currentLevel = 1;
+	public Vector2 originAllowedClick;
+	public Vector2 allowedClick;
 
+	public GameObject portaFinal;
+	public NarrativeManager narrativeManager;
+
+
+	public void EndLevel() {
+		if(currentLevel == 1)
+		{
+			narrativeManager.finalL1();
+
+			iTween.MoveBy(portaFinal, iTween.Hash("y", 5, "easeType", "easeInOutCubic", "loopType", "none", "time", 1.2));
+		}
+	}
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	public void setMapConfig()
+	{
+		if(currentMap.gameObject.name == "Mapa2")
+		{
+			Debug.Log("setting Map config origin to mapa 2"); 
+			originAllowedClick = new Vector2(-26,0);
+		}
+		else
+		{
+			originAllowedClick = new Vector2(1000,0);
+		}
 	}
 }

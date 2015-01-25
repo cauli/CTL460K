@@ -3,6 +3,8 @@ using System.Collections;
 
 public class AstronautMovement : MonoBehaviour {
 
+	public Puzzle puzzle;
+
 	void Start () {
 		Debug.Log ("Start");
 	}
@@ -30,13 +32,17 @@ public class AstronautMovement : MonoBehaviour {
 				this.transform.rotation = Quaternion.Euler(0, 0, AngleDeg - 46);
 			}
 
-			iTween.MoveTo(gameObject, iTween.Hash("x", mousePos3D.x, "y", mousePos3D.y, "loopType", "none", "delay", .2, "speed", 2.3));
+			// TODO this was hardcoded for the left map.
+			if(puzzle.originAllowedClick.x < mousePos3D.x || puzzle.currentMap.name == "MapaInicial")
+			{
+				iTween.MoveTo(gameObject, iTween.Hash("x", mousePos3D.x, "y", mousePos3D.y, "loopType", "none", "delay", .2, "speed", 2.3));
+			}
 
 			RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 			
 			if(hit.collider != null)
 			{
-//				Debug.Log(hit.collider.gameObject.tag);
+				//Debug.Log(hit.collider.gameObject.tag);
 				if(hit.collider.gameObject.tag == "Item"){
 					GameObject[] selectedObjects = GameObject.FindGameObjectsWithTag("SelectedItem");
 					

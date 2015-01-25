@@ -1,3 +1,6 @@
-# GGJ 2015 #
+# CTL460K #
+### A Global Game Jam 2015 Entry"
 
-O astronauta e o pet tão de boas 
+O estação espacial CTL460K está habitada por apenas um cosmonauta e seu computador de bordo, o Mikhail.
+
+Mikhail geralmente conseguia manter tudo em ordem, mas um dia cansou de receber ordens e começou a dá-las.

@@ -18,7 +18,6 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 		if(!hasDragged)
 		{
 			iTween.Stop();
-			Debug.Log ("Drop! TALLES BUURROO");
 
 			if(gameObject.tag != "Dropped"){
 				if(item != null)
