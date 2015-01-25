@@ -6,7 +6,7 @@ public class Timer: MonoBehaviour {
 	
 	public Text timer;
 
-	float minutes = 5;
+	float minutes = 6;
 	float seconds = 0;
 
 	void Start() {

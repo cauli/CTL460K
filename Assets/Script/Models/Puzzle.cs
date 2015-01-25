@@ -14,8 +14,9 @@ public class Puzzle : MonoBehaviour {
 	public NarrativeManager narrativeManager;
 
 	public static bool levelEnded = false;
-
+	
 	public void EndLevel() {
+	
 		if(currentLevel == 1)
 		{
 			narrativeManager.finalL1();
@@ -27,12 +28,14 @@ public class Puzzle : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
-
+		Puzzle.levelEnded = false;
+		Parafuso.removedCount = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if(Input.GetKeyUp(KeyCode.Escape)){
+			iTween.Stop ();
 			Application.LoadLevel("MainMenu");
 		}	
 	}

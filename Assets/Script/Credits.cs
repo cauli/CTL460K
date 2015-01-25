@@ -13,7 +13,10 @@ public class Credits : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.anyKey)
+		{
+			iTween.Stop ();
 			Application.LoadLevel("MainMenu");
+		}
 	}
 
 	void animateCredits(){

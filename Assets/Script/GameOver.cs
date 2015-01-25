@@ -18,6 +18,8 @@ public class GameOver : MonoBehaviour {
 	public IEnumerator autoQuit()
 	{
 		yield return new WaitForSeconds(4.0f);
+
+		iTween.Stop ();
 		Application.LoadLevel("MainMenu");
 	}
 
@@ -34,7 +36,10 @@ public class GameOver : MonoBehaviour {
 		if(isAllowQuit)
 		{	
 			if (Input.anyKey)
+			{
+				iTween.Stop ();
 				Application.LoadLevel("MainMenu");
+			}
 		}
 	
 	}

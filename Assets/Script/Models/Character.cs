@@ -96,6 +96,8 @@ public class Character : MonoBehaviour {
 		{
 			if(Puzzle.levelEnded)
 			{
+				iTween.Stop();
+
 				Application.LoadLevel ("Credits");
 			}
 		}
