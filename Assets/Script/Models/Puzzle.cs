@@ -13,6 +13,7 @@ public class Puzzle : MonoBehaviour {
 	public GameObject portaFinal;
 	public NarrativeManager narrativeManager;
 
+	public static bool levelEnded = false;
 
 	public void EndLevel() {
 		if(currentLevel == 1)
@@ -20,6 +21,8 @@ public class Puzzle : MonoBehaviour {
 			narrativeManager.finalL1();
 
 			iTween.MoveBy(portaFinal, iTween.Hash("y", 5, "easeType", "easeInOutCubic", "loopType", "none", "time", 1.2));
+
+			levelEnded = true;
 		}
 	}
 	// Use this for initialization
@@ -29,7 +32,9 @@ public class Puzzle : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if(Input.GetKeyUp(KeyCode.Escape)){
+			Application.LoadLevel("MainMenu");
+		}	
 	}
 
 	public void setMapConfig()

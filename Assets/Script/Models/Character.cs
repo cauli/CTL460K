@@ -80,6 +80,13 @@ public class Character : MonoBehaviour {
 				audioSrc.Play ();
 			}
 		}
+		else if( coll.gameObject.name == "EndCollider" )
+		{
+			if(Puzzle.levelEnded)
+			{
+				Application.LoadLevel ("Credits");
+			}
+		}
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
