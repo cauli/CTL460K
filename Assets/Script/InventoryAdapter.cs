@@ -8,6 +8,8 @@ public class InventoryAdapter : MonoBehaviour {
 
 	public GameObject inventorySlot;
 
+	private GameObject[] currentItems;
+
 	void Start () {
 		this.UpdateInventory ();
 	}
@@ -18,12 +20,16 @@ public class InventoryAdapter : MonoBehaviour {
 
 	public void UpdateInventory(){
 		int currentX = 0;
-		
+
+		foreach(Transform child in gameObject.transform) {
+			GameObject.Destroy(child.gameObject);
+		}
+
 		foreach(Item item in character.inventario)
 		{
 			
 			GameObject iSlot = Instantiate (inventorySlot, new Vector3(currentX, 0, 0), Quaternion.identity) as GameObject;
-			
+
 			iSlot.transform.SetParent (gameObject.transform, false);
 			
 			if(item != null)

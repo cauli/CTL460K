@@ -40,6 +40,8 @@ public class Character : MonoBehaviour {
 				Debug.Log("DROPOU");
 				inventario[i].renderer.enabled = true;
 				inventario[i].gameObject.transform.position = gameObject.transform.position;
+				inventario[i].gameObject.transform.rigidbody2D.AddTorque(Random.Range(-10,10));
+				inventario[i].gameObject.transform.rigidbody2D.AddForce(new Vector2(Random.Range(-20,20),Random.Range(-20,20)));
 				inventario[i] = null;
 			}
 		}	

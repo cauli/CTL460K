@@ -64,9 +64,9 @@ public class NarrativeManager : MonoBehaviour {
 		setText ("MIKHAIL: I need you to look into it");
 		sfxSrc.PlayOneShot(computer2);
 		yield return new WaitForSeconds(4.00f);
-		setText ("MIKHAIL: What do we do right now?");
+		setText ("MIKHAIL: What do we do now?");
 		sfxSrc.PlayOneShot(computer3);
-		yield return new WaitForSeconds(8.00f);
+		yield return new WaitForSeconds(6.00f);
 
 		deleteText ();
 	}
