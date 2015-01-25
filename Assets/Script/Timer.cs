@@ -32,10 +32,11 @@ public class Timer: MonoBehaviour {
 			timer.text = string.Format("0{0}:{1}", minutes, seconds);
 		}
 
-		if(seconds == 0)
+		if(seconds == 0 && minutes == 0)
 		{
 			Application.LoadLevel ("GameOver");
 		}
+
 
 		yield return new WaitForSeconds(1f);
 

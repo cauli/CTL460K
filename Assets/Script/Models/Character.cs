@@ -21,14 +21,25 @@ public class Character : MonoBehaviour {
 
 	bool InsertItem (Item item) 
 	{
+
+		foreach(Item itemNoInventorio in inventario)
+		{
+			if(itemNoInventorio == item)
+			{
+				return false;
+			}
+		}
+
 		for (int i = 0; i < inventario.Length; i++) {
 			if(inventario[i] == null){
-				inventario[i] = item;
 				item.renderer.enabled = false;
+				item.gameObject.SetActive(false);
+				inventario[i] = item;
 				inventoryAdapter.UpdateInventory();
 				return true;
 			}
 		}
+
 		return false;
 	}
 	
@@ -39,6 +50,7 @@ public class Character : MonoBehaviour {
 			if(inventario[i] == item){
 				Debug.Log("DROPOU");
 				inventario[i].renderer.enabled = true;
+				item.gameObject.SetActive(true);
 				inventario[i].gameObject.transform.position = gameObject.transform.position;
 				inventario[i].gameObject.transform.rigidbody2D.AddTorque(Random.Range(-10,10));
 				inventario[i].gameObject.transform.rigidbody2D.AddForce(new Vector2(Random.Range(-20,20),Random.Range(-20,20)));

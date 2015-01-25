@@ -17,6 +17,6 @@ public class Credits : MonoBehaviour {
 	}
 
 	void animateCredits(){
-		iTween.MoveTo(credits, iTween.Hash("y", 27,"time",12,"easetype", iTween.EaseType.linear, "looptype", iTween.LoopType.loop));
+		iTween.MoveTo(credits, iTween.Hash("y", 36.6f,"time",15,"easetype", iTween.EaseType.linear, "looptype", iTween.LoopType.loop));
 	}
 }	
