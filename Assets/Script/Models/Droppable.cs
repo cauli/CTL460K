@@ -3,12 +3,12 @@ using System.Collections;
 
 public class Droppable : MonoBehaviour {
 
+	public Sprite sprite;
 
 	public Item[] accepts;
 
 	public bool destroysSelfWhenAccepted= false;
-
-
+	
 	// Checks if this droppable accepts
 	// the item dragged to it
 	public bool checkAccept(Item droppedItem)
@@ -29,6 +29,9 @@ public class Droppable : MonoBehaviour {
 							GameObject.Destroy (GameObject.Find("Tampa"));
 						}
 					}
+				}else if(gameObject.name == "Caixa"){
+					SpriteRenderer spriteCaixa = gameObject.gameObject.GetComponent<SpriteRenderer>();
+					spriteCaixa.sprite = sprite;
 				}
 
 				return true;
