@@ -7,6 +7,8 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
 	public Item item;
 
+	private AudioSource negation;
+
 	Image itemImage;
 	Vector3 originalPosition;
 	GameObject player;
@@ -41,6 +43,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 	public void OnEndDrag(PointerEventData pointerEventData) {
 		hasDragged = false;
 
+		bool accepted = false;
 //		Debug.Log ("DragEnd!");
 		RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
@@ -58,12 +61,11 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
 					iTween.MoveTo(character.gameObject, iTween.Hash("x", droppable.transform.position.x, "y", droppable.transform.position.y, "easeType", 
 					                                                "easeInOutCubic", "loopType", "none", "delay", .2, "speed", 2.3));
-				//	character.DropItem(item);
-
 				
-					//reject = true;
+					accepted = true;
+				
 
-					//gameObject.tag = "Dropped";
+
 				}
 				else
 				{
@@ -72,17 +74,23 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 			}			
 		}
 
+		if(!accepted)
+		{
+			negation.Play ();
+		}
 
 		// Send UI item back to original position
 		if(reject)
 		{
+			
+
 			gameObject.transform.position = originalPosition;
 		}
 	}
 
 	void Start ()
 	{
-
+		negation = gameObject.GetComponent<AudioSource>();
 	}
 
 	void Update () {

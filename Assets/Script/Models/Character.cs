@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Character : MonoBehaviour {
@@ -9,19 +10,21 @@ public class Character : MonoBehaviour {
 
 	public AudioSource audioSrc;
 	public GameObject cameraGO;
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public AudioClip inventoryFull;
+
+	private Canvas inventoryCanvas;
+
+	private bool disableInteraction = false;
+
+	void Start ()
+	{
+		inventoryCanvas = inventoryAdapter.gameObject.GetComponent<Canvas>();
 	}
 
 	bool InsertItem (Item item) 
 	{
-
+		Debug.Log ("Tried insert");
 		foreach(Item itemNoInventorio in inventario)
 		{
 			if(itemNoInventorio == item)
@@ -45,10 +48,8 @@ public class Character : MonoBehaviour {
 	
 	public void DropItem (Item item)
 	{
-		Debug.Log("ENTROU");
 		for (int i = 0; i < inventario.Length; i++) {
 			if(inventario[i] == item){
-				Debug.Log("DROPOU");
 				inventario[i].renderer.enabled = true;
 				item.gameObject.SetActive(true);
 				inventario[i].gameObject.transform.position = gameObject.transform.position;
@@ -91,6 +92,10 @@ public class Character : MonoBehaviour {
 
 				audioSrc.Play ();
 			}
+			else
+			{
+				Debug.Log ("Couldnt add");
+			}
 		}
 		else if( coll.gameObject.name == "EndCollider" )
 		{
@@ -104,18 +109,73 @@ public class Character : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D(Collision2D coll) {
-		if (coll.gameObject.tag == "SelectedItem") {
-			// Adicionar item no inventario se ele nao estiver cheio
-			Item item = coll.gameObject.GetComponent<Item>();
-			bool added = InsertItem(item);
+		CollidingWithSelected(coll);
+	}
 
-			if(added)
-			{
-				coll.gameObject.tag = "Item";
-				coll.gameObject.renderer.material.color = Color.white;
+	void OnCollisionStay2D(Collision2D coll) {
+		CollidingWithSelected(coll);
+	}
+
+	void CollidingWithSelected(Collision2D coll)
+	{
+		if(!disableInteraction)
+		{
+
+			if (coll.gameObject.tag == "SelectedItem") {
+				// Adicionar item no inventario se ele nao estiver cheio
+				Item item = coll.gameObject.GetComponent<Item>();
+				bool added = InsertItem(item);
 				
-				audioSrc.Play ();
+				if(added)
+				{
+					coll.gameObject.tag = "Item";
+					coll.gameObject.renderer.material.color = Color.white;
+					
+					audioSrc.Play ();
+				}
+				else
+				{
+					Debug.Log("Not added");
+
+					GameObject.FindGameObjectWithTag("SelectedItem").tag = "Item";
+					StartCoroutine(disableForAWhile());
+					StartCoroutine(unableToAdd());
+				}
 			}
 		}
 	}
+
+	private IEnumerator disableForAWhile()
+	{
+		disableInteraction = true;
+		yield return new WaitForSeconds(1f);
+		disableInteraction = false;
+	}
+	private IEnumerator unableToAdd()
+	{
+
+		inventoryCanvas.enabled = false;
+
+		audioSrc.PlayOneShot (inventoryFull);
+
+		yield return new WaitForSeconds(0.1f);
+
+		inventoryCanvas.enabled = true;
+
+
+		yield return new WaitForSeconds(0.1f);
+
+		inventoryCanvas.enabled = false;
+
+		
+		audioSrc.PlayOneShot (inventoryFull);
+
+		yield return new WaitForSeconds(0.1f);
+
+		inventoryCanvas.enabled = true;
+
+
+	}
+
+	
 }

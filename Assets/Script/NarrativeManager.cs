@@ -75,11 +75,9 @@ public class NarrativeManager : MonoBehaviour {
 	public IEnumerator level1FinalScript() 
 	{
 		isNarrating = true;
-		setText ("MIKHAIL: This one was easy.");
+		setText ("MIKHAIL: This one was easy.\nMIKHAIL: Let\'s see if you\'ll survive next time.");
 		sfxSrc.PlayOneShot(computerFinal);
-		yield return new WaitForSeconds(5.00f);
-		setText ("MIKHAIL: Let\'s see if you\'ll survive next time.");
-		yield return new WaitForSeconds(8.00f);
+		yield return new WaitForSeconds(12.00f);
 		deleteText ();
 	}
 

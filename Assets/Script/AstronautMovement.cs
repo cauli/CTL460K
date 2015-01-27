@@ -38,48 +38,7 @@ public class AstronautMovement : MonoBehaviour {
 				iTween.MoveTo(gameObject, iTween.Hash("x", mousePos3D.x, "y", mousePos3D.y, "loopType", "none", "delay", .2, "speed", 2.3));
 			}
 
-			RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-			
-			if(hit.collider != null)
-			{
-				//Debug.Log(hit.collider.gameObject.tag);
-				if(hit.collider.gameObject.tag == "Item"){
-					GameObject[] selectedObjects = GameObject.FindGameObjectsWithTag("SelectedItem");
-					
-					foreach(GameObject obj in selectedObjects)
-					{
-						obj.tag = "Item";
-						obj.renderer.material.color = Color.white;
-					}
-					
-					hit.collider.gameObject.tag = "SelectedItem";
-					//hit.collider.gameObject.renderer.material.color = Color.blue;
-				}else if(hit.collider.gameObject.tag == "Portal"){
-				//	Debug.Log ("Portal");
 
-					GameObject[] selectedObjects = GameObject.FindGameObjectsWithTag("SelectedPortal");
-					foreach(GameObject obj in selectedObjects)
-					{
-						obj.tag = "Portal";
-					}
-
-					hit.collider.gameObject.tag = "SelectedPortal";
-				}else if(hit.collider.gameObject.tag == "Trigger")
-				{
-					hit.collider.gameObject.GetComponent<Trigger>().Triggered();
-					Debug.Log("Trigger");
-				}
-				else if(hit.collider.gameObject.tag == "InventoryItem"){
-					Debug.Log("HUEHEUHEUHEUUHE");
-				}
-				else if(hit.collider.gameObject.tag == "Mikhail"){
-
-					//Debug.Log("Clicked Mikhail");
-					Mikhail mikhail = hit.collider.gameObject.GetComponent<Mikhail>();
-
-					mikhail.replay();
-				}
-			}
 		}
 	}
 }
