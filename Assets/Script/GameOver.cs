@@ -6,7 +6,7 @@ public class GameOver : MonoBehaviour {
 
 	public GameObject gameOver;
 
-	private bool isAllowQuit = false;
+	private bool isAllowedToQuit = false;
 	// Use this for initialization
 	void Start () {
 
@@ -27,13 +27,13 @@ public class GameOver : MonoBehaviour {
 	public IEnumerator allowQuit()
 	{
 		yield return new WaitForSeconds(3.0f);
-		isAllowQuit = true;
+		isAllowedToQuit = true;
 		StartCoroutine(autoQuit ());
 	}
 
 
 	void Update () {
-		if(isAllowQuit)
+		if(isAllowedToQuit)
 		{	
 			if (Input.anyKey)
 			{
