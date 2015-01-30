@@ -61,22 +61,33 @@ public class Character : MonoBehaviour {
 		inventoryAdapter.UpdateInventory();
 	}
 
+	private void CollideWithSelectedPortal(Collider2D coll)
+	{
+		Portal portal = coll.gameObject.GetComponent<Portal>();
+		
+		float x = portal.destination.mapa.gameObject.transform.position.x;
+		float y = 0;
+		
+		Vector3 toPosition = new Vector3(x,y,-45);
+		// Mover camera para outro mapa 
+		iTween.Stop();
+		
+		cameraGO.GetComponent<Puzzle>().currentMap = portal.destination.mapa;
+		cameraGO.GetComponent<Puzzle>().setMapConfig();
+		
+		Camera.main.transform.position = toPosition;
+		gameObject.transform.position = portal.destination.initialCharacterPosition.position;
+	}
+
+	void OnTriggerStay2D(Collider2D coll) {
+		if (coll.gameObject.tag == "SelectedPortal"){
+			CollideWithSelectedPortal(coll);
+		}
+	}
+
 	void OnTriggerEnter2D(Collider2D coll) {
 		if (coll.gameObject.tag == "SelectedPortal"){
-			Portal portal = coll.gameObject.GetComponent<Portal>();
-			
-			float x = portal.destination.mapa.gameObject.transform.position.x;
-			float y = 0;
-			
-			Vector3 toPosition = new Vector3(x,y,-45);
-			// Mover camera para outro mapa 
-			iTween.Stop();
-
-			cameraGO.GetComponent<Puzzle>().currentMap = portal.destination.mapa;
-			cameraGO.GetComponent<Puzzle>().setMapConfig();
-
-			Camera.main.transform.position = toPosition;
-			gameObject.transform.position = portal.destination.initialCharacterPosition.position;
+			CollideWithSelectedPortal(coll);
 		}
 		else if(coll.gameObject.tag == "SelectedItem" && (coll.gameObject.name == "Adesivo" || coll.gameObject.name == "Laika")){
 			// Adicionar item no inventario se ele nao estiver cheio
@@ -151,9 +162,14 @@ public class Character : MonoBehaviour {
 		yield return new WaitForSeconds(1f);
 		disableInteraction = false;
 	}
+
+	/*
+	 * Unable to add an item:
+	 * make the inventory blink,
+	 * play a little feedback sound
+	 */
 	private IEnumerator unableToAdd()
 	{
-
 		inventoryCanvas.enabled = false;
 
 		audioSrc.PlayOneShot (inventoryFull);
@@ -173,8 +189,6 @@ public class Character : MonoBehaviour {
 		yield return new WaitForSeconds(0.1f);
 
 		inventoryCanvas.enabled = true;
-
-
 	}
 
 	
